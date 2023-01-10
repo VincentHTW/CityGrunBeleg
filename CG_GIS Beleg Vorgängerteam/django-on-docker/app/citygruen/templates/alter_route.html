@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    {% load static %}
+    
+    {% include "include/head.html" %}
+
+  </head>
+  <body>
+            {% include "include/nav.html" %}
+            <h1 id="insert_head">Route bearbeiten</h1>
+            <div class = "insert_form">
+               
+                    {%  csrf_token %}
+
+                    <div class = "form">
+                        <div class="Suche">
+                            <label class = "insert_label"> <b>Name eingeben: </b></label>
+                            <input class = "alter_input_Suche" type = "text" id="Suche_Route" name = "Suche_Route" value ="" placeholder="Name der Route eingeben" >
+                            <button id="alter_suche" class="alter_suche" >Suchen</button>
+                            
+                            {% if Routen %}
+                            <label class = "insert_label"> <b>Route auswählen: </b></label>
+                                <select name="Auswahlliste_Route" size= {{ Routen.count }}>
+                                {% for Route in Routen %}
+                                    <option class="Auswahl_Route" id="Auswahl_Route">{{ Route.id }} - {{ Route.Name }} - {{ Route.Pflegetrupp }}</option>
+                                {% endfor %}
+                                </select>
+                                {% else %}
+                            <label class = "insert_label"> <b></b></label>
+                            <label class = "nodata_label"> <b>Keine Route mit diesem Namen</b></label>
+                            {% endif %}
+                        </div> 
+                    </div>
+
+                    <form action="" method="post"  enctype="multipart/form-data">
+                    {%  csrf_token %}
+                    <div class = "form">
+                        <label class = "insert_label"> <b>ID: </b></label>
+                        <input readonly class = "alter_input" type = "text" id="ID_Route"  name = "ID_Route" value = "{{Routen.first.id}}" placeholder="ID der Route">
+                    </div>
+
+                    <div class = "form">
+                        <label class = "insert_label"><b>Name: </b></label>
+                        <input class = "alter_input" type = "text" name = "Name_Route" value = "{{Routen.first.Name}}" placeholder = "Name...">
+                    </div>
+
+                    <div class = "form">
+                        <label class = "insert_label" id="beschreibung"><b>Beschreibung: </b></label>
+                        <textarea class="alter_input_area" id = "Beschreibung_Route" name = "Beschreibung_Route" rows="4" value = "" placeholder="Beschreibung...">{{Routen.first.Beschreibung}}</textarea>
+                    </div>
+        
+                    <div class = "form">
+                        <label class = "insert_label"><b>Pflegetrupp: </b></label>
+                        <input class = "alter_input" type = "text" name = "Pflegetrupp_Route" value = "{{Routen.first.Pflegetrupp}}" placeholder = "Straße, Hausnummer...">
+                    </div>
+        
+                    <div class = "form">
+                        <label class = "insert_label"><b>Status: </b></label>
+                        {% if Routen.first.Status %}
+                        <input class = "insert_checkbox" type="checkbox" id="aktiv" name="Status_Route" checked>
+                        <label for="aktiv" class = "insert_checkbox_label" id="Status_Route">Route aktiv?</label>
+                        {% else %}
+                        <input class = "insert_checkbox" type="checkbox" id="aktiv" name="Status_Route" unchecked>
+                        <label for="aktiv" class = "insert_checkbox_label" id="Status_Route">Route aktiv?</label>
+                        {% endif %}
+                    </div>
+
+                    <div class = "form">
+                        <input type="submit" class = "insert_button" id="insert_submit" value="Absenden">
+                        <input type="reset" class = "insert_button" id="insert_cancel" value="Zurücksetzen">
+                    </div>
+
+                    <script>                
+        
+                    document.addEventListener("DOMContentLoaded", function(event) {  
+                        document.getElementById('alter_suche').addEventListener('click', getElementsFromFilter)
+                        let auswahl = document.querySelectorAll(".Auswahl_Route")
+                        auswahl.forEach(auswahlelement=>{
+                            auswahlelement.addEventListener("click", showRouten)
+                        })
+                    })
+                           
+                        // Name aus der Suchleiste filtern und an URL hängen
+                        function getElementsFromFilter() {
+                            let filter = document.getElementById('Suche_Route').value;
+                            console.log(filter);
+                            window.location.href = "/alter_route/" + filter
+                        }
+
+                        // Zeige Kunden mit zugehörigen Daten 
+                        function showRouten(e) {
+                            let ausgewaehlteselement = e.target.innerHTML
+                            console.log(ausgewaehlteselement)
+
+                            let QueryArray = ausgewaehlteselement.split(" - ");
+                            let id = QueryArray[0];
+                            let name = QueryArray[1];
+                            let pflegetrupp = QueryArray[2];
+                            console.log(QueryArray[0])
+                            console.log(QueryArray[1])
+                            console.log(QueryArray[2])
+
+                            window.location.href = "/alter_route/" + name + "/" + id
+                        }   
+                        
+                    </script>
+            </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+  </body>
+</html>

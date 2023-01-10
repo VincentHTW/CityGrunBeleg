@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    {% load static %}
+    
+    {% include "include/head.html" %}
+
+  </head>
+  <body>
+    {% include "include/nav.html" %}
+    <h1 id="insert_head">Neuen Kunden anlegen</h1>
+    <div class = "insert_form">
+        <form action="" method="post"  enctype=multipart/form-data>
+            {%  csrf_token %}
+
+            <div class = "form">
+                <label class = "insert_label"><b>Name: </b></label>
+                <input class = "insert_input" type = "text" name = "Name_Kunde" required placeholder = "Name...">
+            </div>
+
+            <div class = "form">
+                <label class = "insert_label"><b>Adresse: </b></label>
+                <input class = "insert_input" type = "text" name = "Adresse_Kunde" required placeholder = "Straße, Hausnummer...">
+            </div>
+
+            <div class = "form">
+                <label class = "insert_label"><b>Postleitzahl: </b></label>
+                <input class = "insert_input" type = "text" name = "Postleitzahl_Kunde" required placeholder = "Postleitzahl...">
+            </div>
+
+            <div class = "form">
+                <label class = "insert_label"><b>Ort: </b></label>
+                <input class = "insert_input" type = "text" name = "Ort_Kunde" required placeholder = "Ort...">
+            </div>
+
+            <div class = "form">
+                <label class = "insert_label"><b>Telefonnummer: </b></label>
+                <input class = "insert_input" type = "text" name = "Telefonnummer_Kunde" required placeholder = "Telefonnummer...">
+            </div>
+
+            <div class = "form">
+                <label class = "insert_label"><b>E-Mail: </b></label>
+                <input class = "insert_input" type = "text" name = "Email_Kunde" required placeholder = "example@mail.com...">
+            </div>
+
+            <div class = "form">
+                <label class = "insert_label"><b>Status: </b></label>
+                <input class = "insert_checkbox" type="checkbox" id="aktiv" name="Status_Kunde" checked>
+                <label for="aktiv" class = "insert_checkbox_label">Kunde aktiv? </label>
+              </div>
+
+              <div class = "form">
+                <input type="submit" class = "insert_button" id="insert_submit" value="Absenden">
+                <input type="reset" class = "insert_button" id="insert_cancel" value="Zurücksetzen">
+            </div>
+
+        </form>
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+  </body>
+</html>
