@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    {% load static %}
+    
+    {% include "include/head.html" %}
+
+  </head>
+  <body>
+    {% include "include/nav.html" %}
+    <h1 id="insert_head">Neue Route anlegen</h1>
+    <div class = "insert_form">
+        <form action="" method="post"  enctype=multipart/form-data>
+            {%  csrf_token %}
+            <div class = "form">
+                <label class = "insert_label"> <b>ID: </b></label>
+                <input readonly class = "insert_input" type = "text"  name = "ID_Route" value = "Automatisch generiert...">
+            </div>
+
+            <div class = "form">
+                <label class = "insert_label"><b>Name: </b></label>
+                <input class = "insert_input" type = "text" name = "Name_Route" required placeholder = "Name...">
+            </div>
+
+            <div class = "form">
+                <label class = "insert_label" id="beschreibung_route"><b>Beschreibung: </b></label>
+                <textarea class="insert_input_area" id = "insert_textarea" name = "Beschreibung_Route" rows="3" required placeholder = "Beschreibung..." ></textarea>
+            </div>
+
+            <div class = "form">
+                <label class = "insert_label"><b>Pflegetrupp: </b></label>
+                <input class = "insert_input" type = "text" name = "Pflegetrupp_Route" required placeholder = "Nummer des Pflegetrupps...">
+            </div>
+
+            <div class = "form">
+                <label class = "insert_label"><b>Status: </b></label>
+                <input class = "insert_checkbox" type="checkbox" id="aktiv" name="Status_Route" checked>
+                <label for="aktiv" class = "insert_checkbox_label">Route aktiv? </label>
+              </div>
+
+            <div class = "form">
+                <input type="submit" class = "insert_button" id="insert_submit" value="Absenden">
+                <input type="reset" class = "insert_button" id="insert_cancel" value="Zurücksetzen">
+            </div>
+
+        </form>
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+  </body>
+</html>

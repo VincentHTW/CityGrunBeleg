@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    {% load static %}
+    
+    {% include "include/head.html" %}
+
+  </head>
+  <body>
+    
+    {% include "include/nav.html" %}
+
+    
+    
+    {% if VerbindungenRouteStandort %}
+
+    <div class="container p-3 my-3 bg-dark text-white">{{VerbindungenRouteStandort.first.Route.Name}} </div>
+
+    <div class="container">
+        <div class="row">
+          <div class="col-12">
+
+            <div class="Scroll" style="overflow-y: scroll">
+              <table class="table table-image table-dark table-striped table-hover">
+                  <!---Head-->
+                <thead>
+                  <tr>
+                    <th scope="col">NR</th>
+                    <th scope="col">Karte</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Standort</th>
+                    <th scope="col">Koordinaten</th>
+                    <th scope="col">Beschreibung</th>
+                  </tr>
+                </thead>
+                <!---Body-->
+                <tbody>
+                    {% for Verbindung in VerbindungenRouteStandort %}
+                    <tr style="transform: rotate(0);">
+                      <!-- <th scope="row"><a href="/citygruen/aktive_routen/route_standorte/standort_planzen/{{Verbindung.key2.id}}/" class="stretched-link"></a></th> -->
+
+                      <!-- ID -->
+                    <td><a href="/route/standort/{{Verbindung.Standort.id}}/" ><button title="Standort öffnen" style="cursor: pointer;">{{Verbindung.Standort.id}}</button></a></td>
+
+                    <!-- Karte -->
+                    <td>
+                      <iframe 
+                        width="300" 
+                        height="170" 
+                        frameborder="0" 
+                        scrolling="no" 
+                        marginheight="0" 
+                        marginwidth="0" 
+                        src="https://maps.google.com/maps?q=+{{Verbindung.Standort.Latitude}}+,+{{Verbindung.Standort.Longitude}}+&hl=de&z=13&amp;output=embed"
+                      >
+                      </iframe>
+                    </td>
+
+                    <!-- Name, Adresse -->
+                    <td>
+                      <h5>{{Verbindung.Standort.Name}} </h5>
+                      {{Verbindung.Standort.Adresse}}, <br>
+                      {{Verbindung.Standort.PLZ}} {{Verbindung.Standort.Ort}}
+                    </td>
+
+                    <!-- KundenName, Beschreibung Standort -->
+                    <td>
+                      <h5>{{Verbindung.Standort.KundenID.Name}}</h5>
+                      {{Verbindung.Standort.Beschreibung}}
+                    </td>
+
+                    <!-- Koordinaten -->
+                    <td>{{Verbindung.Standort.Latitude}} {{Verbindung.Standort.Longitude}}</td>
+
+                    <td>{{Verbindung.Freitext}}</td>
+                </tr>
+                    {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    {% else %}
+    <div class="container p-3 my-3 bg-dark text-white">Keine Standorte in dieser Route </div>
+    {% endif %}
+
+    <br>
+
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+  </body>
+</html>

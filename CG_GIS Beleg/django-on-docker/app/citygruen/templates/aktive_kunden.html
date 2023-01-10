@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    {% load static %}
+    
+    {% include "include/head.html" %}
+
+  </head>
+  <body>
+    
+    {% include "include/nav.html" %}
+
+    <!-- <script>
+      console.log(JSON.parse('{{Routen | safe}}'))
+    </script> -->
+
+    {% if Kunden %}
+
+    <div class="container p-3 my-3 bg-dark text-white">Aktive Kunden </div>
+    <div class="container">
+        <div class="row">
+          <div class="col-12">
+
+              <table class="table table-image table-dark table-striped table-hover">
+                  <!---Head-->
+                <thead>
+                  <tr>
+                    <th scope="col">NR</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Telefonnummer</th>
+                  </tr>
+                </thead>
+                <!---Body-->
+                <tbody>
+
+                  {% for Kunde in Kunden %}
+                    <tr>
+
+                      <td>{{Kunde.id}}</td>
+
+                    
+                      <td>
+                        <h5>{{Kunde.Name}}</h5>
+                        {{Kunde.Adresse}} <br>
+                        {{Kunde.PLZ}}, {{Kunde.Ort}}
+                      </td>
+                        
+
+                      <td>
+                        {{Kunde.Telefonnummer}} <br>
+                        {{Kunde.eMail}}
+                      </td>
+
+                    </tr>
+
+                  {% endfor %}
+                </tbody>
+              </table>
+  
+              
+    {% else %}
+    <div class="container p-3 my-3 bg-dark text-white">No Data </div>
+    {% endif %}
+
+          </div>
+        </div>
+      </div>
+
+    <br>
